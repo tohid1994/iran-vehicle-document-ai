@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+*.egg-info/
+build/
+dist/
+.env
+.env.*
+models/*.traineddata
+models/LICENSE
+wheelhouse/
+offline-bundle/
+# Never commit photographs or extraction output.
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.tiff
+*.pdf
+outputs/

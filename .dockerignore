@@ -1,0 +1,12 @@
+.git
+.venv
+__pycache__
+.pytest_cache
+.ruff_cache
+dist
+build
+wheelhouse
+offline-bundle
+tests
+.env
+.env.*

@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "1.0",
+  "success": true,
+  "documentType": "IRAN_VEHICLE_REGISTRATION",
+  "vehicle": {
+    "brand": "برند ساختگی",
+    "model": "تیپ آزمایشی",
+    "year": "1402",
+    "color": null,
+    "fuelType": null,
+    "vehicleType": null,
+    "origin": null,
+    "vin": null,
+    "chassisNumber": null,
+    "engineNumber": null,
+    "plate": null
+  },
+  "owner": {
+    "firstName": null,
+    "lastName": null,
+    "fullName": "مالک ساختگی",
+    "nationalId": null
+  },
+  "fields": {
+    "vehicle.brand": {
+      "rawValue": "برند ساختگی",
+      "normalizedValue": "برند ساختگی",
+      "confidence": null,
+      "engineScore": 98.0,
+      "boundingBox": {
+        "x": 10,
+        "y": 10,
+        "width": 200,
+        "height": 25
+      },
+      "extractionMethod": "label_inline",
+      "validationStatus": "unverified",
+      "requiresReview": true
+    },
+    "vehicle.model": {
+      "rawValue": "تیپ آزمایشی",
+      "normalizedValue": "تیپ آزمایشی",
+      "confidence": null,
+      "engineScore": 98.0,
+      "boundingBox": {
+        "x": 10,
+        "y": 60,
+        "width": 200,
+        "height": 25
+      },
+      "extractionMethod": "label_inline",
+      "validationStatus": "unverified",
+      "requiresReview": true
+    },
+    "vehicle.year": {
+      "rawValue": "1402",
+      "normalizedValue": "1402",
+      "confidence": null,
+      "engineScore": 98.0,
+      "boundingBox": {
+        "x": 10,
+        "y": 110,
+        "width": 200,
+        "height": 25
+      },
+      "extractionMethod": "label_inline",
+      "validationStatus": "valid",
+      "requiresReview": true
+    },
+    "vehicle.color": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    },
+    "vehicle.fuelType": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    },
+    "vehicle.vehicleType": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    },
+    "vehicle.vin": {
+      "rawValue": "1HGCM82633I004352",
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": 98.0,
+      "boundingBox": {
+        "x": 10,
+        "y": 210,
+        "width": 200,
+        "height": 25
+      },
+      "extractionMethod": "label_inline",
+      "validationStatus": "invalid",
+      "requiresReview": true
+    },
+    "vehicle.chassisNumber": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    },
+    "vehicle.engineNumber": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    },
+    "vehicle.plate": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    },
+    "owner.fullName": {
+      "rawValue": "مالک ساختگی",
+      "normalizedValue": "مالک ساختگی",
+      "confidence": null,
+      "engineScore": 98.0,
+      "boundingBox": {
+        "x": 10,
+        "y": 160,
+        "width": 200,
+        "height": 25
+      },
+      "extractionMethod": "label_inline",
+      "validationStatus": "unverified",
+      "requiresReview": true
+    },
+    "owner.firstName": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    },
+    "owner.lastName": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    },
+    "owner.nationalId": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    },
+    "vehicle.origin": {
+      "rawValue": null,
+      "normalizedValue": null,
+      "confidence": null,
+      "engineScore": null,
+      "boundingBox": null,
+      "extractionMethod": "missing",
+      "validationStatus": "missing",
+      "requiresReview": true
+    }
+  },
+  "confidence": null,
+  "requiresReview": true,
+  "reviewFields": [
+    "vehicle.brand",
+    "vehicle.model",
+    "vehicle.year",
+    "vehicle.color",
+    "vehicle.fuelType",
+    "vehicle.vehicleType",
+    "vehicle.vin",
+    "vehicle.chassisNumber",
+    "vehicle.engineNumber",
+    "vehicle.plate",
+    "owner.fullName",
+    "owner.firstName",
+    "owner.lastName",
+    "owner.nationalId",
+    "vehicle.origin"
+  ],
+  "warnings": [
+    "possible_blur",
+    "poor_exposure",
+    "low_contrast",
+    "confidence_not_calibrated",
+    "manual_review_required"
+  ],
+  "quality": {
+    "width": 500,
+    "height": 500,
+    "blurVariance": 0.0,
+    "brightness": 255.0,
+    "contrast": 0.0,
+    "warnings": [
+      "possible_blur",
+      "poor_exposure",
+      "low_contrast"
+    ],
+    "operations": [],
+    "coordinateSpace": "processed_image",
+    "originalToProcessed": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "processingTimeMs": 61
+}

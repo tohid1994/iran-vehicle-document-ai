@@ -1,0 +1,8 @@
+include README.fa.md LICENSE Dockerfile compose.yaml SECURITY.md CONTRIBUTING.md
+recursive-include docs *.md *.json
+recursive-include scripts *.py *.sh
+recursive-include examples *.py *.mjs *.json
+include models/manifest.json
+recursive-include tests *.py
+include .gitignore .dockerignore
+recursive-include .github *.yml
