@@ -37,7 +37,8 @@ class SyntheticAdapter:
 
 def test_extraction_contract_and_no_guesses():
     result = VehicleDocumentReader(adapter=SyntheticAdapter()).extract(raster())
-    assert result.success
+    assert not result.success
+    assert "incomplete_required_fields" in result.warnings
     assert result.vehicle.brand == "برند ساختگی"
     assert result.vehicle.model == "تیپ آزمایشی"
     assert result.vehicle.year == "1402"

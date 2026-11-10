@@ -4,6 +4,99 @@
   "license": "Apache-2.0",
   "files": {
     "fas.traineddata": "db1c0a91208aff00d3cf1ed2c1d23f76419afd5f024688b4f71adc3f2ce4a505",
-    "eng.traineddata": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2"
+    "eng.traineddata": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+    "fas_refine.traineddata": "99e420969b5ddd2cb135b416316a7ed417c59c4faf9e0d28941348f6448114df",
+    "persian_digit_templates.npz": "fb6c0b53ddadf5d9a3d478f38fae8bcf6ec93809fd316b137737c97f8b806066"
+  },
+  "refinement": {
+    "source": "tesseract-ocr/tessdata_best",
+    "revision": "e12c65a915945e4c28e237a9b52bc4a8f39a0cec",
+    "files": [
+      "fas_refine.traineddata"
+    ],
+    "license": "Apache-2.0"
+  },
+  "digitTemplates": {
+    "version": "1",
+    "training": "synthetic-font-glyphs-only",
+    "fonts": [
+      {
+        "name": "DejaVuSans-Bold.ttf",
+        "sha256": "a4c5bc453ca281d90ea079e596da7ae0dfeb5777497c29ec254e76d97ff6f890"
+      },
+      {
+        "name": "DejaVuSans-BoldOblique.ttf",
+        "sha256": "c35383d5e56add5cc9cdc9f4e4a899f9e540f7c7e49f1901074c2d03af194eff"
+      },
+      {
+        "name": "DejaVuSans-ExtraLight.ttf",
+        "sha256": "221efe6dfc06ba251a42b50ae4d4241155554f88d832ddb7617affc8f3119876"
+      },
+      {
+        "name": "DejaVuSans-Oblique.ttf",
+        "sha256": "e2f09289f4276309a36b9a93e5a0ac64957ef3eb7158151b243d41f667151ee4"
+      },
+      {
+        "name": "DejaVuSans.ttf",
+        "sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e"
+      },
+      {
+        "name": "DejaVuSansCondensed-Bold.ttf",
+        "sha256": "21f02ebcea75529d3ed9d26e089cd1b9c59a4b784119ba3a96e9bc83cf755ec7"
+      },
+      {
+        "name": "DejaVuSansCondensed-BoldOblique.ttf",
+        "sha256": "ba8db8a1aba41e53aa1401c1a7fe75d66bb027bf6cd66ecaf8d16af70f590358"
+      },
+      {
+        "name": "DejaVuSansCondensed-Oblique.ttf",
+        "sha256": "2cc07734aa87334774ff8355eeb5f082baa164502457d8eab8fff66196cdd400"
+      },
+      {
+        "name": "DejaVuSansCondensed.ttf",
+        "sha256": "6de96c09bf752e3774583eea6bc3fb0b60f1733c595f22a926c89219ba8ade43"
+      },
+      {
+        "name": "DejaVuSansMono-Bold.ttf",
+        "sha256": "0d3c03d1b667192f91223660a3163325cf83132662fe4d9f7d6e596bf7a995c2"
+      },
+      {
+        "name": "DejaVuSansMono-BoldOblique.ttf",
+        "sha256": "2084995adab143b149258f5944b7f863804796b753014526bd7f7915b1b20770"
+      },
+      {
+        "name": "DejaVuSansMono-Oblique.ttf",
+        "sha256": "710323dd803666c37988df68e736c233d96efdf5c770c8ee28f4c4f4b84fb32d"
+      },
+      {
+        "name": "DejaVuSansMono.ttf",
+        "sha256": "54bf827eb99404e8f430c330ad30f063334f637eba0109b6a18d4f566a8e9dd8"
+      },
+      {
+        "name": "NotoKufiArabic-Bold.ttf",
+        "sha256": "11c1608fb7c70135ab4cfd126f2300c81c7ca08c9bcffaff61b947edba234e65"
+      },
+      {
+        "name": "NotoKufiArabic-Regular.ttf",
+        "sha256": "befb9d07506942ba2a7e0e85c65a24a76792c937d812bc80f1095d0f660cf330"
+      },
+      {
+        "name": "NotoNaskhArabic-Bold.ttf",
+        "sha256": "b5cbcb561b4b540ff11d7b6934577dbbbbb9e1d152d47f6f31f19176d58ff39c"
+      },
+      {
+        "name": "NotoNaskhArabic-Regular.ttf",
+        "sha256": "8c67eaa2f0086872628fc3f7f760386f83c8be5c5e9a1ba3a38891237b2ac7cb"
+      },
+      {
+        "name": "NotoSansArabic-Bold.ttf",
+        "sha256": "ded6fc7359ca36d15d7aab9ef0c066e21ce48b26a069994d6602fa2cb9a1b952"
+      },
+      {
+        "name": "NotoSansArabic-Regular.ttf",
+        "sha256": "504d7407d86875acf7d04dfaa0fd7524d0b8797723bc4aa18022f29db25b0b6e"
+      }
+    ],
+    "licenses": "DejaVu font license and SIL Open Font License (Noto)"
   }
 }

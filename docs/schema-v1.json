@@ -48,6 +48,13 @@
           "default": null,
           "title": "Rawvalue"
         },
+        "sourceReadings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sourcereadings",
+          "type": "array"
+        },
         "normalizedValue": {
           "anyOf": [
             {
@@ -399,6 +406,11 @@
     },
     "success": {
       "title": "Success",
+      "type": "boolean"
+    },
+    "transcriptionComplete": {
+      "default": false,
+      "title": "Transcriptioncomplete",
       "type": "boolean"
     },
     "documentType": {

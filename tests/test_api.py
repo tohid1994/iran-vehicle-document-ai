@@ -61,11 +61,10 @@ def test_invalid_template_rejected_without_echo():
         assert response.status_code == 422 and "PRIVATE" not in response.text
 
 
-def test_real_worker_timeout_and_temp_cleanup(monkeypatch, tmp_path):
+def test_worker_timeout_and_temp_cleanup_control_flow(monkeypatch, tmp_path):
     import asyncio
     import tempfile
     from pathlib import Path
-    from unittest.mock import AsyncMock
 
     import vehicle_document_ai.api as api
 
@@ -90,7 +89,6 @@ def test_real_worker_timeout_and_temp_cleanup(monkeypatch, tmp_path):
         return SlowWorker()
 
     monkeypatch.setattr(asyncio, "create_subprocess_exec", create)
-    AsyncMock()  # use synchronous recorder for killpg
     calls = []
     monkeypatch.setattr(api.os, "killpg", lambda *args: calls.append(args))
     with TestClient(create_app()) as client:

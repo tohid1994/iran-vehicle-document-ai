@@ -31,7 +31,7 @@ Use Python 3.11+ and a compatible Tesseract 5 native runtime. On Debian/Ubuntu:
 
 ```bash
 sudo apt-get update
-sudo apt-get install tesseract-ocr
+sudo apt-get install tesseract-ocr fonts-noto-core fonts-dejavu-core
 python -m venv .venv
 . .venv/bin/activate
 pip install .
@@ -103,9 +103,11 @@ curl -X POST http://127.0.0.1:8000/api/v1/documents/extract \
 | GET | `/docs` | Swagger UI (standard UI assets require internet) |
 | GET | `/openapi.json` | API contract, usable completely offline |
 
-`success` means at least three distinct vehicle labels produced candidates; it
-is a processing heuristic, **not** proof that the image is a genuine registration
-or that all required fields were read. HTTP 200 can contain `success: false`.
+`documentType` is identified heuristically from distinct vehicle labels.
+`success` additionally requires populated brand, model, year, color, fuel,
+VIN, chassis, engine, plate, owner full name and national ID. It is not proof of
+correctness or authenticity; every field still requires review. HTTP 200 can
+contain `success: false` with partial results.
 `health.status=ok` is liveness; check `ocrReady` before routing work. Expected
 errors are sanitized: 401 auth, 413 byte limits, 422 invalid image/request,
 429 capacity, 503 models/runtime failure, 504 overall timeout.
@@ -170,6 +172,12 @@ client-side code. Require explicit user review before saving extracted values.
 ## Known limitations
 
 - No real-document accuracy assessment, calibration, benchmark or production certification.
+- A guarded legacy-form profile detects a copper VIN grid plus chassis/engine
+  label evidence, then reads value-only regions with separate Persian/Latin OCR.
+  It has been checked on ONE real supplied sample; its geometry is not universal.
+  Grid-free, shifted or newer forms fall back to label extraction. Regional low
+  OCR scores are rejected (40 for general values, 20 for a four-digit year);
+  these are conservative heuristics, not calibrated correctness probabilities.
 - Label and geometry heuristics may miss layouts, merged OCR words, vertical/rotated
   documents, glare, holograms, complex tables and unlabeled plates beside barcodes.
 - No trained document detector, learned layout engine, automatic template selection,
@@ -203,3 +211,50 @@ Optional preprocessing is available via REST query flags, for example
 `/api/v1/documents/extract?rectify=true&deskew=true&enhance=true`.
 A vetted layout template can be supplied as the multipart text field
 `layout_template` (JSON). In the CLI use `--template template.json`.
+
+
+The legacy form reader additionally uses local `fas_refine.traineddata` from a
+pinned tessdata_best revision for color and contextual national-ID OCR. The model
+preparation script also generates a checksum-protected digit template asset from
+Noto and DejaVu font glyphs (synthetic digits only). The fonts are preparation-time
+dependencies, not runtime dependencies. Their license notices accompany generated
+assets. `regionalRefinementReady` in the model inventory reports asset availability.
+
+National-ID reading combines a contextual OCR sequence with independently segmented
+glyph evidence. Only strong visual template matches may replace an OCR character;
+ambiguous glyphs retain the observed OCR character. Segmentation must yield ten
+glyphs. The resulting sequence must then pass the national-ID checksum. The checksum
+never searches for or manufactures missing digits. This remains experimental:
+synthetic-font templates and a single real-sample check do not establish accuracy.
+The evidence's `sourceReadings` preserves the original OCR read and fused read.
+Calibrated `confidence` and fused `engineScore` stay null; manual review is required.
+
+
+### Transcription versus validation
+
+`transcriptionComplete` reports whether the required printed core values have been
+read, including a 17-cell VIN transcription. `success` still requires validated
+normalized values for every required field. A fully read printed identifier can
+therefore produce `transcriptionComplete: true` and `success: false`. In particular,
+printed I/O/Q characters are retained in `fields["vehicle.vin"].rawValue`, not
+silently changed to 1/0, while `vehicle.vin` remains null if standard syntax fails.
+The warning `printed_vin_fails_standard_validation` distinguishes this case from
+an unreadable VIN. Neither flag certifies document authenticity or general accuracy.
+
+The guarded legacy reader now reads individual VIN cells, rectifies the old plate
+frame and detects its province separator, reads each numeric group separately, and
+gets the plate letter from actual OCR text. The model reader re-reads uncertain
+word regions; its letter-name vocabulary only selects words actually produced by
+OCR, without completing an unknown trim from a catalog. Full owner names are still
+not split automatically, and domestic/foreign origin remains unknown without a
+vetted independent catalog.
+
+
+### Current stability limits
+
+The identified legacy grid can trigger canonical scale/origin alignment and
+quarter-turn orientation handling automatically; other enhancement remains opt-in.
+The same-photo stability check currently passes padding, quarter-turns and lossless
+encoding, but fails exact field matching under 75%/125% scaling, +/-2-degree tilt
+and JPEG quality-90 recompression. These are known unresolved failures, not
+supported accuracy guarantees. See docs/verification.md before deploying.

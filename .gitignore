@@ -20,3 +20,6 @@ offline-bundle/
 *.tiff
 *.pdf
 outputs/
+
+models/*.npz
+models/digit-font-LICENSES.txt

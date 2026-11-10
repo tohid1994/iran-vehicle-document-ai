@@ -23,9 +23,12 @@ def main():
         enhance=os.environ.get("IVDAI_ENHANCE") == "1",
     )
     try:
+        import cv2
+
         from ..layout import LayoutTemplate
         from ..reader import VehicleDocumentReader
 
+        cv2.setNumThreads(1)
         template_json = os.environ.get("IVDAI_LAYOUT_TEMPLATE")
         template = LayoutTemplate.model_validate_json(template_json) if template_json else None
         reader = VehicleDocumentReader(settings=settings, template=template)

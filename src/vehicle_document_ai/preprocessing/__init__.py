@@ -94,6 +94,11 @@ def preprocess(image: np.ndarray, settings: Settings) -> tuple[np.ndarray, Quali
                 image = cv2.warpAffine(image, affine, (w, h), borderValue=(255, 255, 255))
                 transform = np.vstack([affine, [0, 0, 1]]) @ transform
                 operations.append("small_angle_deskew")
+    from ..layout.legacy import align_legacy
+
+    image, alignment, alignment_operations = align_legacy(image)
+    transform = alignment @ transform
+    operations.extend(alignment_operations)
     gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     contrast, brightness = float(gray.std()), float(gray.mean())
     blur = float(cv2.Laplacian(gray, cv2.CV_64F).var())

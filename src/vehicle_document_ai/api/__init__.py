@@ -60,7 +60,15 @@ class BodyLimit:
             async def replay():
                 return next(iterator, {"type": "http.request", "body": b"", "more_body": False})
 
-            await self.app(scope, replay, send)
+            async def private_send(message):
+                if message["type"] == "http.response.start":
+                    message["headers"] = [
+                        *message.get("headers", []),
+                        (b"cache-control", b"no-store"),
+                    ]
+                await send(message)
+
+            await self.app(scope, replay, private_send)
 
 
 def create_app() -> FastAPI:
@@ -150,7 +158,12 @@ def create_app() -> FastAPI:
                 status = (
                     503
                     if code
-                    in {"ocr_models_unavailable_or_unverified", "ocr_failed", "processing_failed"}
+                    in {
+                        "ocr_models_unavailable_or_unverified",
+                        "digit_templates_unavailable_or_unverified",
+                        "ocr_failed",
+                        "processing_failed",
+                    }
                     else 422
                 )
                 raise HTTPException(status, code)
@@ -158,7 +171,11 @@ def create_app() -> FastAPI:
 
     @app.get("/api/v1/health")
     async def health():
-        return {"status": "ok", "ocrReady": adapter.inventory()["ready"]}
+        inventory = adapter.inventory()
+        return {
+            "status": "ok",
+            "ocrReady": inventory["ready"] and inventory["regionalRefinementReady"],
+        }
 
     @app.get("/api/v1/models", dependencies=[Depends(authorize)])
     async def models():

@@ -67,3 +67,16 @@ Workers are terminated as a process group on POSIX and their private temporary
 directory is cleaned by the API parent even after timeout. On Windows use an
 external process supervisor/job-object policy for descendant process termination;
 the API's POSIX process-group guarantee does not apply.
+
+
+### Regional refinement assets
+
+Run model preparation with the Python dependencies already installed. On Debian/
+Ubuntu also install `fonts-noto-core` and `fonts-dejavu-core` during preparation.
+`prepare_models.py` fetches the pinned Persian refinement model and invokes
+`prepare_digit_templates.py`. The latter uses synthetic glyphs from installed
+Noto/DejaVu fonts and writes a safe NumPy archive, provenance hashes and font license
+notices to the local models directory. Transfer this entire directory offline.
+Inference requires neither system fonts nor network access. To prepare templates
+with custom font paths use `prepare_digit_templates.py --fonts PATH --font-license
+LICENSE_PATH` (repeat the license option for multiple notices).

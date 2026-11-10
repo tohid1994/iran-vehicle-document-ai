@@ -32,5 +32,21 @@ def validate(field: str, value: str) -> tuple[str | None, str]:
         )
     if field == "year":
         return (value, "valid") if re.fullmatch(r"[0-9]{4}", value) else (None, "invalid")
-    # Plate formats vary by vehicle category. Preserve read text without inventing components.
+    if field == "fuelType":
+        value = value.strip(" .،,؛")
+        fuels = {"بنزین", "گازوئیل", "دیزل", "گاز", "دوگانه سوز", "بنزین-گاز", "برق", "هیبرید"}
+        return (value, "valid") if value in fuels else (None, "invalid")
+    if field in {"brand", "model", "color", "vehicleType", "fullName"}:
+        # Do not accept neighboring field labels or Latin hallucinations as Persian values.
+        if any(label in value for label in ("تعداد", "شماره", "ظرفیت", "نام پدر", "نوع سوخت")):
+            return None, "invalid"
+    if field in {"engineNumber", "chassisNumber"}:
+        if not re.fullmatch(r"[A-Z0-9-]{4,30}", value):
+            return None, "invalid"
+    if field == "plate":
+        # Only a fully read private-car pattern is accepted. Never reorder or fill digits.
+        # Other categories remain raw evidence until a category-specific parser is supplied.
+        if not re.fullmatch(r"[0-9]{2} [ا-ی] [0-9]{3} [0-9]{2}", value):
+            return None, "invalid"
+        return value, "valid"
     return (value, "unverified") if value else (None, "missing")

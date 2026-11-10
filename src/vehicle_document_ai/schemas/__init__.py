@@ -24,6 +24,7 @@ class TextRegion(Contract):
 
 class FieldEvidence(Contract):
     rawValue: str | None = None
+    sourceReadings: list[str] = Field(default_factory=list)
     normalizedValue: str | None = None
     confidence: float | None = Field(default=None, ge=0, le=1)
     engineScore: float | None = Field(default=None, ge=0, le=100)
@@ -78,6 +79,7 @@ class Analysis(Contract):
 class Extraction(Contract):
     schemaVersion: Literal["1.0"] = "1.0"
     success: bool
+    transcriptionComplete: bool = False
     documentType: Literal["IRAN_VEHICLE_REGISTRATION"] | None = None
     vehicle: Vehicle = Field(default_factory=Vehicle)
     owner: Owner = Field(default_factory=Owner)

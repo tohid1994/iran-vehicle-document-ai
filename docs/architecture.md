@@ -38,3 +38,34 @@ More advanced adapters should return word/line boxes and actual engine scores.
 Implement regional OCR optionally with `recognize_region`. Calibrated confidence
 requires labeled real-world evaluation stratified by field and document layout;
 never convert raw OCR scores into correctness probabilities by dividing by 100.
+
+
+## Guarded legacy form profile
+
+A copper-colored, regularly spaced VIN grid is detected from the actual image.
+A profile is used only when chassis and engine label candidates also exist above
+that grid. Its value windows translate and scale with the detected grid. The
+profile never stores vehicle/owner values and does not split full names.
+This is a single-sample layout, not a learned universal detector. Text-only and
+Latin/numeric regions use different OCR settings; raw-line segmentation avoids
+Tesseract's observed empty single-line results on isolated Persian words.
+
+When the profile is selected, its scoped ROI reads replace wide same-line
+candidates for those fields, preventing text from a neighboring column being
+used as a value. Low engine scores yield null normalized values, with raw evidence
+retained and review required. Fuel values must match an explicit vocabulary after
+punctuation cleanup; unparseable plates are null. Unknown plate categories need a
+future parser. No dictionary edit-distance substitutions or ID digit repairs occur.
+
+`success` requires every core field listed in reader.py's `required` tuple to
+have a normalized value. Recognition of several labels alone is insufficient.
+A `success` value never replaces the per-field manual-review policy.
+
+
+VIN cell reads preserve I/O/Q literally. Validation may reject the printed string
+while transcription is complete. Only a complete 17-character cell read enables
+that distinction; an absent or undecodable cell is never supplied from a VIN rule.
+Plate frame rectification and the detected internal separator determine numeric
+group regions, and the letter must occur in actual OCR. The reader's success flag
+requires valid normalized core values; transcriptionComplete permits a fully read
+but invalid printed VIN, whose text remains in rawValue with validationStatus invalid.
